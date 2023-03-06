@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        const eventSource = new EventSource("/api/v2/sse")
+        eventSource.onmessage = event => {
+            const p = document.createElement("p");
+            p.innerText = event.data
+            document.getElementById("messages").appendChild(p)
+        }
+
+        eventSource.onerror = error => {
+            eventSource.close();
+        };
+    </script>
+</head>
+<body>
+    <div id="messages"></div>
+</body>
+</html>
